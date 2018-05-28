@@ -5,6 +5,7 @@ import firebase from 'firebase';
 import Header from "./components/Header";
 import LoginForm from "./components/LoginForm";
 import MainContent from "./components/Content";
+import Footer from "./components/Footer";
 
 const firebaseConfig ={
       apiKey: "AIzaSyB7anyLmf0dexglB-P-kOfnJR_3Vh3zGbA",
@@ -101,12 +102,15 @@ export default class App extends React.Component {
   render() {
     return (
       <Container>
+
         <Header doLogout={() => this.doLogout()} />
 
         <Content>
           <LoginForm isLogin={this.state.isLogin} doLogin={(email, password) => this.doLogin(email, password)}/>
           <MainContent show={this.state.isLogin} firebase={this.state.firebase}/>
         </Content>
+
+        <Footer />
 
       </Container>
     );
