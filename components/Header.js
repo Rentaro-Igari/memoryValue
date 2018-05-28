@@ -1,8 +1,21 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Container, Header, Left, Body, Right, Title } from 'native-base';
+import { PropTypes } from "prop-types";
+import { Container, Header, Left, Body, Right, Title, Icon, Button } from 'native-base';
 
 export default class AppHeader extends React.Component {
+  static get propTypes() {
+    return {
+      doLogout: PropTypes.func.isRequire
+    };
+  }
+
+  static get defaultProps() {
+    return {
+      doLogout: () => {}
+    };
+  }
+
   render() {
   	return (
   	  <Header style={styles.header}>
@@ -10,7 +23,11 @@ export default class AppHeader extends React.Component {
         <Body>
           <Title style={styles.title}>Memory Value</Title>
         </Body>
-        <Right />
+        <Right>
+          <Button transparent onPress={() => this.props.doLogout()}>
+            <Icon name="ios-log-out" />
+          </Button>
+        </Right>
   	  </Header>
   	);
   }
