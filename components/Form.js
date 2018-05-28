@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import firebase from 'firebase';
+import moment from "moment";
 import { StyleSheet } from "react-native";
 import { Form, Textarea, Item } from "native-base";
 
@@ -30,12 +31,20 @@ export default class MainForm extends Component {
   }
 
   onPressButton() {
-    this.state.database.ref('/tweets').push({
-      text: this.state.text
-    });
-    this.setState({
-      text: ""
-    });
+    const currentUser = firebase.auth().currentUser;
+    if(currentUser) {
+      console.log(currentUser);
+      this.state.database.ref('/tweets').push({
+        text: this.state.text,
+        created_at: moment().format("YYYY-MM-DD hh:mm"),
+        uid: currentUser.uid
+      });
+      this.setState({
+        text: ""
+      });
+    } else {
+      console.log("cannnot get currentUser");
+    }
   }
 
   render() {

@@ -46,31 +46,22 @@ export default class List extends React.Component {
             transparent
             key={key}
           >
-          <CardItem>
-            <Body>
-              <Text>
-                {this.state.tweets[key].text}
-              </Text>
-            </Body>
-          </CardItem>
-          <CardItem>
-            {/*<Left>
-              <Button transparent>
-                <Icon active name="thumbs-up" />
-                <Text>12 Likes</Text>
-              </Button>
-            </Left>
-            <Body>
-              <Button transparent>
-                <Icon active name="chatbubbles" />
-                <Text>4 Comments</Text>
-              </Button>
-            </Body>*/}
-            <Right>
-              <Text>11h ago</Text>
-            </Right>
-          </CardItem>
-        </Card>
+            <CardItem header>
+              <Text>{this.state.tweets[key].uid}</Text>
+            </CardItem>
+            <CardItem>
+              <Body>
+                <Text>
+                  {this.state.tweets[key].text}
+                </Text>
+              </Body>
+            </CardItem>
+            <CardItem>
+              <Right>
+                <Text>{this.state.tweets[key].created_at}</Text>
+              </Right>
+            </CardItem>
+          </Card>
         ))}
       </View>
   	);
