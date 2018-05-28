@@ -25,10 +25,6 @@ export default class MainContent extends React.Component {
     };
   }
 
-  onPressButton() {
-    console.log("on Press Button")
-  }
-
   render() {
     if(!this.props.show) {
       return null;
