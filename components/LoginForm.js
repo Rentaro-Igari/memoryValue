@@ -45,6 +45,10 @@ export default class LoginForm extends Component {
       this.state.email,
       this.state.password
     );
+    this.setState({
+      email: "",
+      password: ""
+    })
   }
 
   render() {
@@ -69,10 +73,12 @@ export default class LoginForm extends Component {
             secureTextEntry
           />
         </Item>
-        <CommonButton
-          text={"Sign in"}
-          onPress={() => this.onPressButton()}
-        />
+        <View style={{marginTop: 30, marginLeft: 80}} >
+          <CommonButton
+            text={"Sign in"}
+            onPress={() => this.onPressButton()}
+          />
+        </View>
       </Form>
     );
   }

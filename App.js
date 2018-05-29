@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import LoginForm from "./components/LoginForm";
 import MainContent from "./components/Content";
 import Footer from "./components/Footer";
+import Loading from "./components/Loading";
 
 const firebaseConfig ={
       apiKey: "AIzaSyB7anyLmf0dexglB-P-kOfnJR_3Vh3zGbA",
@@ -23,7 +24,8 @@ export default class App extends React.Component {
     super();
     this.state = {
       isLogin: false,
-      firebase: firebaseApp
+      firebase: firebaseApp,
+      loading: false
     }
   }
 
@@ -38,6 +40,10 @@ export default class App extends React.Component {
 
   checkLogin() {
     // 現在ログインしているユーザーを取得する
+    this.setState({
+      loading: true
+    });
+
     let result;
     this.state.firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -46,12 +52,17 @@ export default class App extends React.Component {
         console.log(user);
 
         this.setState({
-          isLogin: true
+          isLogin: true,
+          loading: false
         })
 
       } else {
         // No user is signed in.
         console.log("cannnot get current_user");
+
+        this.setState({
+          loading: false
+        });
 
         result = false;
       }
@@ -59,11 +70,16 @@ export default class App extends React.Component {
   }
 
   doLogin(email, password) {
+    this.setState({
+      loading: true
+    });
+
     // register user
     this.state.firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(() => {
       this.setState({
-        isLogin: true
+        isLogin: true,
+        loading: false
       });
     })
     .catch(error => {
@@ -77,7 +93,8 @@ export default class App extends React.Component {
       .then(() => {
 
         this.setState({
-          isLogin: true
+          isLogin: true,
+          loading: false
         });
       })
       .catch(function(error) {
@@ -111,6 +128,8 @@ export default class App extends React.Component {
         </Content>
 
         <Footer />
+
+        <Loading show={this.state.loading} />
 
       </Container>
     );

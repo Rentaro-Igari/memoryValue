@@ -3,6 +3,7 @@ import { View } from "react-native";
 import { PropTypes } from "prop-types";
 import { Card, CardItem, Left, Body, Right, Text, Icon, Button } from 'native-base';
 import firebase from "firebase";
+import moment from "moment";
 
 export default class List extends React.Component {
   constructor() {
@@ -41,7 +42,7 @@ export default class List extends React.Component {
   render() {
   	return (
       <View>
-        {Object.keys(this.state.tweets).map(key => (
+        {Object.keys(this.state.tweets).reverse().map(key => (
           <Card
             transparent
             key={key}
